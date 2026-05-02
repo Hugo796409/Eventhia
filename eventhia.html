@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventhia | Le futur du staffing événementiel</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #1A1A1A;
+      --bg-soft: #2A2A2A;
+      --surface: rgba(255, 255, 255, 0.06);
+      --surface-soft: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f8f4eb;
+      --muted: #EAEAEA;
+      --accent: #1A1A1A;
+      --accent-light: #2A2A2A;
+      --accent-bright: #333333;
+      --gold: #c6a75e;
+      --gold-soft: rgba(198, 167, 94, 0.14);
+      --glow: rgba(198, 167, 94, 0.05);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at 12% 12%, rgba(198, 167, 94, 0.12), transparent 22%),
+                  radial-gradient(circle at 88% 18%, rgba(255, 255, 255, 0.08), transparent 18%),
+                  linear-gradient(180deg, #1A1A1A 0%, #2A2A2A 38%, #333333 100%);
+      color: #f8f4eb;
+    }
+
+    body {
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      position: relative;
+    }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 18% 15%, rgba(51, 51, 51, 0.45), transparent 20%),
+                  radial-gradient(circle at 82% 22%, rgba(198, 167, 94, 0.12), transparent 18%),
+                  radial-gradient(circle at 70% 80%, rgba(51, 51, 51, 0.28), transparent 24%);
+      pointer-events: none;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(26, 26, 26, 0.74);
+      border-bottom: 1px solid rgba(198, 167, 94, 0.12);
+      box-shadow: inset 0 -1px 0 rgba(198, 167, 94, 0.1);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-size: 1.125rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.3rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(242, 242, 242, 0.92);
+      text-decoration: none;
+      font-size: 0.96rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+    }
+
+    .hero {
+      min-height: calc(100vh - 82px);
+      display: grid;
+      align-items: center;
+      padding: 2rem 1.5rem 4rem;
+      max-width: 1180px;
+      margin: 0 auto;
+      gap: 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--gold);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 1.4rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(198, 167, 94, 0.7), transparent);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.95;
+      margin: 0;
+      letter-spacing: -0.05em;
+      text-shadow: 0 4px 55px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-subtitle {
+      margin: 1.5rem 0 2rem;
+      max-width: 620px;
+      color: rgba(242, 242, 242, 0.9);
+      font-size: 1.1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 1rem 1.6rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+    }
+
+    .btn-primary {
+      background: #1A1A1A;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 28px rgba(198, 167, 94, 0.22);
+    }
+
+    .btn-secondary {
+      background: #1A1A1A;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(198, 167, 94, 0.25);
+      background: rgba(198, 167, 94, 0.95);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .hero-visual {
+      padding: 2rem;
+      background: rgba(26, 26, 26, 0.48);
+      border: 1px solid rgba(198, 167, 94, 0.16);
+      border-radius: 32px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, #c6a75e24, transparent 25%),
+                  radial-gradient(circle at 80% 90%, rgba(198, 167, 94, 0.08), transparent 25%);
+      pointer-events: none;
+    }
+
+    .hero-card {
+      display: grid;
+      gap: 1.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tile {
+      display: grid;
+      gap: 1rem;
+      padding: 1.2rem 1.3rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(198, 167, 94, 0.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-tile strong {
+      font-size: 0.98rem;
+      color: var(--gold);
+    }
+
+    .hero-tile p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      background: transparent;
+      border-top: none;
+    }
+
+    section + section {
+      border-top: 1px solid rgba(26, 26, 26, 0.06);
+    }
+
+    section#services {
+      padding-top: 2.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .services-flow .section-headline {
+      border-bottom-color: rgba(198, 167, 94, 0.08);
+    }
+
+    .section-headline {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--gold-soft);
+    }
+
+    .section-headline span {
+      display: inline-flex;
+      background: var(--gold-soft);
+      color: var(--gold);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+    }
+
+    .section-headline h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+    }
+
+    .section-subtitle {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+      margin-top: 0.85rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .service-panels {
+      display: grid;
+      gap: 3rem;
+      margin-top: 1.8rem;
+    }
+
+    .service-panel {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2rem;
+      align-items: center;
+      min-height: 500px;
+      padding: 2.6rem;
+      border-radius: 42px;
+      background: radial-gradient(circle at top left, rgba(198, 167, 94, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(24, 24, 24, 0.95), rgba(12, 12, 12, 0.96));
+      border: 1px solid rgba(198, 167, 94, 0.18);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.24);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .service-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 28%);
+      pointer-events: none;
+    }
+
+    .service-panel.alternate {
+      grid-template-columns: 0.95fr 1.05fr;
+      background: radial-gradient(circle at top right, rgba(198, 167, 94, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(18, 18, 18, 0.95), rgba(12, 12, 12, 0.96));
+    }
+
+    .service-panel .panel-copy,
+    .service-panel .panel-visual {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-panel .panel-copy {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .service-panel .panel-copy h3 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .service-panel .panel-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .service-panel .panel-copy .service-strap {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(198, 167, 94, 0.14);
+      color: var(--gold);
+      font-size: 0.92rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .service-panel .service-list {
+      display: grid;
+      gap: 0.75rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+
+    .service-panel .service-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .service-panel .service-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(198, 167, 94, 0.14);
+    }
+
+    .service-panel .panel-visual {
+      border-radius: 32px;
+      min-height: 420px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.12);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .service-panel .panel-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .service-panel .panel-visual:hover img {
+      transform: scale(1.06);
+    }
+
+    .service-panel .panel-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(6, 6, 6, 0.7) 100%);
+      pointer-events: none;
+    }
+
+    .service-panel .visual-tag {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      z-index: 2;
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.2rem;
+      border-radius: 24px;
+      background: rgba(12, 12, 12, 0.78);
+      color: #f8f2e0;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(198, 167, 94, 0.18);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .service-panel .visual-tag strong {
+      display: block;
+      font-size: 0.98rem;
+      color: var(--gold);
+    }
+
+    @media (max-width: 900px) {
+      .service-panel {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .service-panel.alternate {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .benefit-card:hover,
+    .gallery-card:hover,
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(198, 167, 94, 0.22);
+      background: rgba(26, 26, 26, 0.18);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+    }
+
+    .benefit-card,
+    .gallery-card,
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      background: rgba(26, 26, 26, 0.08);
+      border: 1px solid rgba(198, 167, 94, 0.12);
+      padding: 1.8rem;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.10);
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-icon,
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      margin-bottom: 1.25rem;
+      background: rgba(198, 167, 94, 0.12);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    .benefit-card h3 {
+      margin: 0 0 0.85rem;
+      font-size: 1.15rem;
+    }
+
+    .benefit-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-card {
+      min-height: 220px;
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.10), rgba(198, 167, 94, 0.10));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(198, 167, 94, 0.12);
+    }
+
+    .gallery-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: none;
+      pointer-events: none;
+    }
+
+    .gallery-card span {
+      position: relative;
+      z-index: 1;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .gallery-detail-section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .gallery-images-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .gallery-images-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(198, 167, 94, 0.12);
+    }
+
+    .back-to-gallery {
+      margin-top: 2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .main-form,
+    .candidate-form {
+      display: grid;
+      gap: 1.2rem;
+      background: rgba(26, 26, 26, 0.55);
+      padding: 2rem;
+      border-radius: 32px;
+      border: 1px solid rgba(198, 167, 94, 0.16);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(16px);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form-grid.two-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .form-group label {
+      font-size: 0.92rem;
+      color: rgba(242, 242, 242, 0.82);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(198, 167, 94, 0.18);
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      outline: none;
+      font: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      min-height: 48px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: -0.25rem;
+    }
+
+    .section-highlight {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1rem;
+      align-items: start;
+    }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 180px;
+      padding: 2rem 1.5rem;
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      grid-column: 2 / 3;
+    }
+
+    .social-row .social-link {
+      min-width: auto;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .social-row {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.95rem 1.25rem;
+      border-radius: 20px;
+      background: rgba(26, 26, 26, 0.08);
+      border: 1px solid rgba(198, 167, 94, 0.14);
+      color: rgba(242, 242, 242, 0.96);
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease;
+      min-width: 170px;
+    }
+
+    .social-link:hover {
+      background: rgba(198, 167, 94, 0.15);
+      transform: translateY(-2px) scale(1.05);
+      border-color: rgba(198, 167, 94, 0.24);
+    }
+
+    .social-icon {
+      width: 1.2rem;
+      height: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      fill: currentColor;
+    }
+
+    .footer {
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      color: rgba(242, 242, 242, 0.72);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a {
+      color: rgba(242, 242, 242, 0.6);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .footer-links a:hover {
+      color: rgba(242, 242, 242, 0.9);
+    }
+
+    .footer small {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .legal-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      background: transparent;
+    }
+
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(26, 26, 26, 0.08);
+      padding: 2rem;
+      border-radius: 24px;
+      border: 1px solid rgba(198, 167, 94, 0.12);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .legal-page,
+    .rgpd-page,
+    .gallery-page {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #1A1A1A 0%, #2A2A2A 100%);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 2rem 1.5rem;
+      color: var(--text);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: rgba(242, 242, 242, 0.9);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+    }
+
+    .rgpd-page .section-headline,
+    .gallery-page .section-headline {
+      margin-top: 0;
+    }
+
+    .gallery-page .gallery-page-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .gallery-page .gallery-page-images img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(198, 167, 94, 0.12);
+    }
+
+    .gallery-page .gallery-category {
+      margin-bottom: 3rem;
+    }
+
+    .gallery-page .gallery-category h3 {
+      margin-bottom: 1rem;
+      color: var(--gold);
+    }
+
+    .page.legal-active > section:not(.rgpd-page),
+    .page.legal-active nav,
+    .page.legal-active footer {
+      display: none;
+    }
+
+    .page.gallery-active > section:not(.gallery-page),
+    .page.gallery-active nav,
+    .page.gallery-active footer {
+      display: none;
+    }
+
+
+    .form-panel {
+      position: relative;
+    }
+
+    .form-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.02), transparent 40%);
+      border-radius: 32px;
+    }
+
+    .form-card {
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-section {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .highlight-box {
+      padding: 1.25rem 1.4rem;
+      border-radius: 24px;
+      background: rgba(26, 26, 26, 0.08);
+      border: 1px solid rgba(198, 167, 94, 0.14);
+      box-shadow: none;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: rgba(242, 242, 242, 0.88);
+    }
+
+    .badge-list {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .badge-list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border-radius: 999px;
+      background: rgba(26, 26, 26, 0.1);
+      border: 1px solid rgba(198, 167, 94, 0.14);
+      color: rgba(242, 242, 242, 0.96);
+      list-style: none;
+    }
+
+    .badge-list li::before {
+      content: '•';
+      color: var(--gold);
+    }
+
+    .alert {
+      display: none;
+      padding: 1rem 1.2rem;
+      border-radius: 18px;
+      background: rgba(26, 26, 26, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(26, 26, 26, 0.15);
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      border: 1px solid rgba(198, 167, 94, 0.16);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(242, 242, 242, 0.96);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      inset: auto 1.5rem 0;
+      top: 76px;
+      width: calc(100% - 3rem);
+      background: rgba(26, 26, 26, 0.88);
+      border-radius: 22px;
+      border: 1px solid rgba(198, 167, 94, 0.16);
+      padding: 1rem;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4,
+      .gallery-grid,
+      .contact-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 1.5rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        flex-wrap: wrap;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-bottom: 2.5rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .btn {
+        min-width: unset;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav>
+      <div class="nav-inner">
+        <div class="brand">Eventhia</div>
+        <button class="mobile-toggle" aria-label="Ouvrir le menu">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="#hero">Accueil</a>
+          <a href="#services">Services</a>
+          <a href="#why">Pourquoi nous</a>
+          <a href="#gallery">Galerie</a>
+          <a href="#quote">Devis</a>
+          <a href="#recruit">Recrutement</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+          <a href="#hero">Accueil</a>
+          <a href="#services">Services</a>
+          <a href="#why">Pourquoi nous</a>
+          <a href="#gallery">Galerie</a>
+          <a href="#quote">Devis</a>
+          <a href="#recruit">Recrutement</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero" id="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Agence d'intérim événementiel</div>
+          <h1>Eventhia</h1>
+          <p class="hero-subtitle">Le futur du staffing événementiel, avec des équipes premium, réactives et prêtes à sublimer chaque moment de votre événement.</p>
+          <div class="hero-actions">
+            <a href="#quote" class="btn btn-primary">Demander un devis</a>
+            <a href="#recruit" class="btn btn-secondary">Rejoindre nos équipes</a>
+          </div>
+        </div>
+
+        <div class="hero-visual fade-in">
+          <div class="hero-card">
+            <div class="hero-tile">
+              <strong>Service opérationnel</strong>
+              <p>Des équipes d'accueil, logistique et catering parfaitement orchestrées pour tout type d'événement.</p>
+            </div>
+            <div class="hero-tile">
+              <strong>Clientèle premium</strong>
+              <p>Partenaires B2B, événements corporate, soirées VIP et lancements de marque, avec un suivi dédié.</p>
+            </div>
+            <div class="hero-tile">
+              <strong>Réactivité 24/7</strong>
+              <p>Réponse rapide à vos demandes et équipes mobilisées en quelques heures.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="fade-in services-flow">
+      <div class="section-headline">
+        <span>Nos services</span>
+        <h2>Trois piliers pour vos événements</h2>
+      </div>
+      <p class="section-subtitle">Des services pensés pour sublimer chaque moment, avec élégance et efficacité opérationnelle.</p>
+
+      <div class="service-panels">
+        <div class="service-panel">
+          <div class="panel-copy">
+            <span class="service-strap">Service accueil</span>
+            <h3>Une première impression professionnelle et soignée</h3>
+            <p>Nous mettons à disposition un personnel qualifié pour assurer un accueil irréprochable lors de vos événements et au sein de votre entreprise. Nos équipes représentent votre image avec professionnalisme et adaptabilité.</p>
+            <ul class="service-list">
+              <li>Accueil événementiel</li>
+              <li>Accueil en entreprise</li>
+              <li>Mannequinat événementiel</li>
+              <li>Assistance commerciale</li>
+              <li>Assistance administrative</li>
+              <li>Animation commerciale</li>
+              <li>Interprétation et traduction</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80" alt="Accueil événementiel haut de gamme" loading="lazy" />
+            <div class="visual-tag">
+              <strong>Accueil et représentation</strong>
+              <span>Personnel de réception, assistantes et hôtesses</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-panel alternate">
+          <div class="panel-copy">
+            <span class="service-strap">Service restauration</span>
+            <h3>Un service fluide et élégant pour vos événements</h3>
+            <p>Nos équipes interviennent pour garantir une expérience client de qualité lors de vos événements, avec un personnel formé aux exigences du service haut de gamme.</p>
+            <ul class="service-list">
+              <li>Service en salle</li>
+              <li>Service bar</li>
+              <li>Cuisine événementielle</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80" alt="Service de restauration événementielle" loading="lazy" />
+            <div class="visual-tag">
+              <strong>Service attentif</strong>
+              <span>Équipes formées aux exigences premium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-panel">
+          <div class="panel-copy">
+            <span class="service-strap">Service logistique</span>
+            <h3>Une organisation efficace et maîtrisée</h3>
+            <p>Nous assurons la mise en place, la gestion et le bon déroulement logistique de vos événements grâce à des équipes rigoureuses et expérimentées.</p>
+            <ul class="service-list">
+              <li>Manutention</li>
+              <li>Régie événementielle</li>
+              <li>Livraison de matériel</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Logistique événementielle" loading="lazy" />
+            <div class="visual-tag">
+              <strong>Gestion terrain</strong>
+              <span>Montage, coordination et distribution du matériel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="fade-in">
+      <div class="section-headline">
+        <span>Pourquoi nous</span>
+        <h2>Le choix des organisateurs exigeants</h2>
+      </div>
+      <div class="badge-list">
+        <li>Réactivité immédiate pour toutes les demandes</li>
+        <li>Personnel sélectionné, formé et bilingue</li>
+        <li>Flexibilité horaire & capacité d'adaptation</li>
+        <li>Expérience événementielle haut niveau</li>
+      </div>
+    </section>
+
+    <section id="gallery" class="fade-in">
+      <div class="section-headline">
+        <span>Galerie</span>
+        <h2>Ambiance & savoir-faire</h2>
+      </div>
+      <p class="section-subtitle">Quelques ambiances stylisées qui traduisent l'énergie, l'élégance et le dynamisme de notre service.</p>
+      <div class="gallery-grid">
+        <div class="gallery-card" data-category="accueil">
+          <span>Accueil VIP</span>
+        </div>
+        <div class="gallery-card" data-category="service">
+          <span>Service premium</span>
+        </div>
+        <div class="gallery-card" data-category="coordination">
+          <span>Coordination live</span>
+        </div>
+        <div class="gallery-card" data-category="banquet">
+          <span>Banquet design</span>
+        </div>
+        <div class="gallery-card" data-category="logistique">
+          <span>Logistique fluide</span>
+        </div>
+        <div class="gallery-card" data-category="equipe">
+          <span>Équipe dédiée</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="gallery-page" class="gallery-page fade-in" style="display: none;">
+      <a href="#" class="back-link">← Retour à l’accueil</a>
+      <div class="section-headline">
+        <span>Galerie</span>
+        <h2>Galerie interactive</h2>
+      </div>
+      <section id="categorie-accueil" class="gallery-category">
+        <h3>Accueil VIP</h3>
+        <div class="gallery-page-images">
+          <img src="https://images.unsplash.com/photo-1491933386642-8d43a0fb9a1a?auto=format&fit=crop&w=600&q=80" alt="Accueil VIP" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" alt="Accueil VIP" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=600&q=80" alt="Accueil VIP" loading="lazy" />
+        </div>
+      </section>
+      <section id="categorie-service" class="gallery-category">
+        <h3>Service premium</h3>
+        <div class="gallery-page-images">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Service premium" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Service premium" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80" alt="Service premium" loading="lazy" />
+        </div>
+      </section>
+      <section id="categorie-coordination" class="gallery-category">
+        <h3>Coordination live</h3>
+        <div class="gallery-page-images">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=80" alt="Coordination live" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=600&q=80" alt="Coordination live" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=600&q=80" alt="Coordination live" loading="lazy" />
+        </div>
+      </section>
+      <section id="categorie-banquet" class="gallery-category">
+        <h3>Banquet design</h3>
+        <div class="gallery-page-images">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Banquet design" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=600&q=80" alt="Banquet design" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80" alt="Banquet design" loading="lazy" />
+        </div>
+      </section>
+      <section id="categorie-logistique" class="gallery-category">
+        <h3>Logistique fluide</h3>
+        <div class="gallery-page-images">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Logistique fluide" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80" alt="Logistique fluide" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Logistique fluide" loading="lazy" />
+        </div>
+      </section>
+      <section id="categorie-equipe" class="gallery-category">
+        <h3>Équipe dédiée</h3>
+        <div class="gallery-page-images">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Équipe dédiée" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80" alt="Équipe dédiée" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Équipe dédiée" loading="lazy" />
+        </div>
+      </section>
+    </div>
+
+    <section id="quote" class="fade-in">
+      <div class="section-headline">
+        <span>Devis</span>
+        <h2>Faites votre demande de devis</h2>
+      </div>
+      <p class="section-subtitle">Remplissez le formulaire ci-dessous pour envoyer votre demande de devis.</p>
+      <div class="main-form form-panel">
+        <div class="form-card">
+          <div class="alert" id="quoteAlert">Merci ! Votre demande de devis a bien été pris en compte. Nous vous contacterons très prochainement.</div>
+          <form id="quoteForm">
+            <div class="form-grid two-cols">
+              <div class="form-group">
+                <label for="companyName">Nom de l’entreprise</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Ex. Studio Nova" required />
+              </div>
+              <div class="form-group">
+                <label for="contactName">Nom du contact</label>
+                <input type="text" id="contactName" name="contactName" placeholder="Ex. Léa Martin" required />
+              </div>
+              <div class="form-group">
+                <label for="emailQuote">Email</label>
+                <input type="email" id="emailQuote" name="emailQuote" placeholder="contact@entreprise.com" required />
+              </div>
+              <div class="form-group">
+                <label for="phoneQuote">Téléphone</label>
+                <input type="tel" id="phoneQuote" name="phoneQuote" placeholder="+33 6 12 34 56 78" required />
+              </div>
+              <div class="form-group">
+                <label for="eventType">Type d’événement</label>
+                <select id="eventType" name="eventType" required>
+                  <option value="">Sélectionnez</option>
+                  <option>Soirée corporate</option>
+                  <option>Lancement produit</option>
+                  <option>Salon / foire</option>
+                  <option>Incentive / gala</option>
+                  <option>Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="eventDate">Date de l’événement</label>
+                <input type="date" id="eventDate" name="eventDate" required />
+              </div>
+              <div class="form-group">
+                <label for="eventLocation">Lieu</label>
+                <input type="text" id="eventLocation" name="eventLocation" placeholder="Ex. Paris, Lyon, Nice" required />
+              </div>
+              <div class="form-group">
+                <label for="guestCount">Nombre de personnes nécessaires</label>
+                <input type="number" id="guestCount" name="guestCount" min="1" placeholder="Ex. 120" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="eventDescription">Description du besoin</label>
+              <textarea id="eventDescription" name="eventDescription" placeholder="Décrivez le déroulé, le profil souhaité et les attentes spécifiques." required></textarea>
+              <p class="form-note">Plus vous partagez d’informations, plus notre proposition sera précise.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="recruit" class="fade-in">
+      <div class="section-headline">
+        <span>Recrutement</span>
+        <h2>Rejoignez l'équipe Eventhia</h2>
+      </div>
+      <p class="section-subtitle">Vous avez l'esprit service et une expérience dans l'événementiel ? Postulez dès maintenant et rejoignez un collectif d'excellence.</p>
+      <div class="main-form form-panel">
+        <div class="form-card">
+          <div class="alert" id="recruitAlert">Merci ! Votre candidature a bien été simulée. Nous reviendrons vers vous après examen.</div>
+          <form id="recruitForm">
+            <div class="form-grid two-cols">
+              <div class="form-group">
+                <label for="candidateName">Nom / Prénom</label>
+                <input type="text" id="candidateName" name="candidateName" placeholder="Ex. Julien Dubois" required />
+              </div>
+              <div class="form-group">
+                <label for="candidateEmail">Email</label>
+                <input type="email" id="candidateEmail" name="candidateEmail" placeholder="julien@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="candidatePhone">Téléphone</label>
+                <input type="tel" id="candidatePhone" name="candidatePhone" placeholder="+33 6 98 76 54 32" required />
+              </div>
+              <div class="form-group">
+                <label for="experience">Expérience</label>
+                <select id="experience" name="experience" required>
+                  <option value="">Sélectionnez</option>
+                  <option>1-2 ans</option>
+                  <option>3-5 ans</option>
+                  <option>5+ ans</option>
+                  <option>Débutant motivé</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="candidateMessage">Message</label>
+              <textarea id="candidateMessage" name="candidateMessage" placeholder="Racontez-nous votre expérience et ce que vous cherchez." required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="cvUpload">CV / Profil</label>
+              <input type="text" id="cvUpload" name="cvUpload" placeholder="Nom du fichier ou lien de profil" required />
+              <p class="form-note">Champ simulé — intégration facile via Google Forms ou backend ultérieurement.</p>
+            </div>
+            <button type="submit" class="btn btn-secondary">Envoyer ma candidature</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <div class="section-headline">
+        <span>Contact</span>
+        <h2>Restons connectés</h2>
+      </div>
+      <p class="section-subtitle">Besoin d’une réponse rapide ? Nos équipes sont disponibles par email et téléphone, avec un support personnalisé pour chaque projet.</p>
+      <div class="contact-grid">
+        <article class="contact-card">
+          <div class="contact-icon">📧</div>
+          <h3>Email</h3>
+          <p>contact@eventhia.agency</p>
+        </article>
+        <article class="contact-card">
+          <div class="contact-icon">📞</div>
+          <h3>Téléphone</h3>
+          <p>+33 1 23 45 67 89</p>
+        </article>
+        <article class="contact-card">
+          <div class="contact-icon">📍</div>
+          <h3>Adresse</h3>
+          <p>Paris, France</p>
+        </article>
+        <div class="social-row">
+          <a class="social-link" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon">🅾</span>
+            Instagram
+          </a>
+          <a class="social-link" href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon">ⓕ</span>
+            Facebook
+          </a>
+          <a class="social-link" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <span class="social-icon"></span>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer fade-in">
+      <p>Eventhia — L'agence d'intérim événementiel qui réinvente le staffing premium.</p>
+      <div class="footer-links">
+        <a href="#mentions-legales">Mentions légales</a>
+        <a href="#confidentialite">Politique de confidentialité</a>
+        <a href="#cookies">Politique de cookies</a>
+      </div>
+      <small>© 2026 Eventhia – Tous droits réservés</small>
+    </footer>
+
+    <div id="rgpd-page" class="rgpd-page fade-in" style="display: none;">
+      <a href="#" class="back-link">← Retour à l’accueil</a>
+      <div class="section-headline">
+        <span>Informations légales</span>
+        <h2>Mentions légales & RGPD</h2>
+      </div>
+      <section id="mentions-legales" class="legal-section">
+        <div class="legal-content">
+          <h3>Mentions légales</h3>
+          <p>Eventhia est une agence d'intérim événementiel dédiée aux organisateurs exigeants. Cette page présente les informations légales relatives à l'éditeur et à l'hébergement du site.</p>
+
+          <h3>Nom de l'entreprise</h3>
+          <p>Eventhia</p>
+
+          <h3>Responsable</h3>
+          <p>Directeur : Julie Dupont</p>
+
+          <h3>Contact</h3>
+          <p>Email : contact@eventhia.agency<br>Téléphone : +33 1 23 45 67 89<br>Adresse : 123 Avenue des Événements, 75001 Paris, France</p>
+
+          <h3>Hébergement</h3>
+          <p>Hébergé par OVH, 2 rue de l'Église, 59000 Lille, France.</p>
+
+          <h3>Propriété intellectuelle</h3>
+          <p>Le contenu du site (textes, images, logos) est protégé par le droit d'auteur. Toute reproduction totale ou partielle est interdite sans autorisation.</p>
+        </div>
+      </section>
+
+      <section id="confidentialite" class="legal-section">
+        <div class="legal-content">
+          <h3>Politique de confidentialité</h3>
+          <p>Vos données sont traitées avec confidentialité et utilisées uniquement pour répondre à vos demandes de devis, candidatures ou informations commerciales.</p>
+
+          <h3>Collecte des données</h3>
+          <p>Nous collectons les données que vous renseignez dans les formulaires : nom, prénom, adresse email, téléphone et détails de votre projet ou expérience.</p>
+
+          <h3>Utilisation des données</h3>
+          <p>Ces informations servent à traiter votre demande, vous recontacter, gérer vos candidatures et améliorer nos services. Elles ne sont pas vendues à des tiers.</p>
+
+          <h3>Protection des données</h3>
+          <p>Nous mettons en place des mesures de sécurité pour protéger vos données contre l'accès non autorisé, la perte et la divulgation.</p>
+
+          <h3>Durée de conservation</h3>
+          <p>Les données sont conservées pendant la durée nécessaire au traitement de votre demande, et au maximum 3 ans après notre dernier échange.</p>
+
+          <h3>Droits des utilisateurs</h3>
+          <p>Conformément au RGPD, vous pouvez demander l'accès, la rectification, la suppression ou la portabilité de vos données à contact@eventhia.agency.</p>
+        </div>
+      </section>
+
+      <section id="cookies" class="legal-section">
+        <div class="legal-content">
+          <h3>Politique de cookies</h3>
+          <p>Cette page décrit l'utilisation des cookies pour assurer le fonctionnement du site et optimiser votre expérience de navigation.</p>
+
+          <h3>Cookies techniques</h3>
+          <p>Les cookies techniques sont nécessaires au fonctionnement du site, à la navigation et à la gestion des formulaires.</p>
+
+          <h3>Cookies analytiques</h3>
+          <p>Nous utilisons des cookies analytiques anonymisés pour mesurer l'audience et améliorer la qualité du site.</p>
+
+          <h3>Gestion des cookies</h3>
+          <p>Vous pouvez refuser les cookies depuis votre navigateur. Cela peut limiter certaines fonctionnalités du site.</p>
+
+          <h3>Consentement</h3>
+          <p>En poursuivant votre navigation, vous acceptez l'utilisation des cookies décrits sur cette page.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.querySelectorAll('nav a, .mobile-menu a');
+
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Smooth scroll and active link highlight
+    const sections = document.querySelectorAll('section[id], .hero');
+    const navAnchors = document.querySelectorAll('nav .nav-links a');
+
+    function updateActiveLink() {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.id || 'hero';
+        const navLink = document.querySelector(`nav .nav-links a[href="#${id}"]`);
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          navAnchors.forEach(link => link.classList.remove('active'));
+          if (navLink) navLink.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
+
+    // Animate elements on scroll
+    const animatedItems = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    animatedItems.forEach(item => observer.observe(item));
+
+    // Form simulation handlers
+    const quoteForm = document.getElementById('quoteForm');
+    const recruitForm = document.getElementById('recruitForm');
+    const quoteAlert = document.getElementById('quoteAlert');
+    const recruitAlert = document.getElementById('recruitAlert');
+
+    function handleFormSubmission(form, alert) {
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        alert.classList.add('show');
+        form.reset();
+        setTimeout(() => alert.classList.remove('show'), 6500);
+      });
+    }
+
+    handleFormSubmission(quoteForm, quoteAlert);
+    handleFormSubmission(recruitForm, recruitAlert);
+
+    // Legal pages toggle
+    const footerLinks = document.querySelectorAll('.footer-links a');
+    const backButtons = document.querySelectorAll('.back-link');
+    const page = document.querySelector('.page');
+    const rgpdPage = document.getElementById('rgpd-page');
+    const galleryPage = document.getElementById('gallery-page');
+
+    footerLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          rgpdPage.style.display = 'block';
+          page.classList.add('legal-active');
+          setTimeout(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 20);
+        }
+      });
+    });
+
+    backButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        rgpdPage.style.display = 'none';
+        galleryPage.style.display = 'none';
+        page.classList.remove('legal-active');
+        page.classList.remove('gallery-active');
+      });
+    });
+
+    // Gallery interaction
+    const galleryCards = document.querySelectorAll('.gallery-card');
+    const backToGalleryBtn = document.querySelector('.back-to-gallery');
+
+    galleryCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const category = card.getAttribute('data-category');
+        const targetSection = document.getElementById(`categorie-${category}`);
+        if (targetSection) {
+          galleryPage.style.display = 'block';
+          page.classList.add('gallery-active');
+          setTimeout(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 20);
+        }
+      });
+    });
+
+    backToGalleryBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      galleryPage.style.display = 'none';
+      page.classList.remove('gallery-active');
+    });
+  </script>
+</body>
+</html>
